@@ -20,7 +20,7 @@ PLAN = {
     ("Hostel A, floor 3", "after sign"): {"wet": 0.27, "dry": 0.32, "hazardous": 0.48},
 }
 WEEKS_PER_PHASE = 6
-START = date(2026, 11, 2)
+START = date(2026, 7, 6)
 
 
 def make_sample(seed: int = 2026) -> list[Row]:
