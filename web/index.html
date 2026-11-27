@@ -121,7 +121,7 @@
     <h2 id="h-method">Method</h2>
     <dl class="method">
       <dt>Streams</dt><dd>Wet (biodegradable), dry (non-biodegradable) and domestic hazardous, as in India's Solid Waste Management Rules, 2016. Sanitary waste is wrapped and goes with dry waste under those rules. The catalogue is a starting point; cities differ.</dd>
-      <dt>Rate</dt><dd>Misplaced items / all items found in a bin, pooled over the audits in a phase. If every item in a group has a weight, the mass rate is computed the same way in grams and shown in the CSV export from the command line tool.</dd>
+      <dt>Rate</dt><dd>Misplaced items / all items found in a bin, pooled over the audits in a phase. If every item in a group has a weight, the command line tool also gives the rate by mass (<code>binaudit summary --json</code>, field <code>mass_rate</code>).</dd>
       <dt>Interval</dt><dd>95% percentile interval from 2,000 bootstrap draws that resample whole audits (a cluster bootstrap). Items from one bin on one day are not independent, so resampling items would give intervals that are too narrow. The seed is fixed, so the same data always gives the same interval.</dd>
       <dt>Small sample</dt><dd>Flagged when a group has fewer than 5 audits or fewer than 30 items.</dd>
       <dt>Did it change?</dt><dd>After rate minus before rate, with a bootstrap interval that resamples audits within each phase. If the interval is entirely below zero the reading is "fewer misplaced items after"; entirely above zero, "more"; otherwise "no clear change". A bin with no sign, audited over the same weeks, is the best check that the change came from the sign.</dd>
