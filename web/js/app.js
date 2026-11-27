@@ -125,8 +125,8 @@ function renderResults() {
     <td>${cap(s.bin_stream)}</td><td>${esc(s.phase || "-")}</td>
     <td class="num">${s.audits}</td><td class="num">${s.items}</td><td class="num mis">${s.misplaced}</td>
     <td class="num">${pct(s.rate)}</td>
-    <td class="num">${pct(s.ci_bootstrap[0])} to ${pct(s.ci_bootstrap[1])}${s.small_sample ? ' <span class="flag">small sample</span>' : ""}</td>
-    <td>${ciBar(s.ci_bootstrap[0], s.ci_bootstrap[1], s.rate)}</td></tr>`).join("");
+    <td class="num">${s.audits < 2 ? '<span class="flag">needs 2+ audits</span>' : `${pct(s.ci_bootstrap[0])} to ${pct(s.ci_bootstrap[1])}${s.small_sample ? ' <span class="flag">small sample</span>' : ""}`}</td>
+    <td>${s.audits < 2 ? ciBar(NaN, NaN, s.rate) : ciBar(s.ci_bootstrap[0], s.ci_bootstrap[1], s.rate)}</td></tr>`).join("");
 
   const ph = phases(mine);
   fillSelect($("c-before"), ph, ph.map((p) => p || "(no phase)"));
@@ -156,7 +156,10 @@ function renderResults() {
 // ---------- signs ----------
 function renderSign() {
   fillSelect($("s-site"), sites());
-  const site = $("s-site").value, bin = $("s-bin").value;
+  const site = $("s-site").value;
+  const binsHere = STREAMS.filter((b) => rows.some((r) => r.site === site && r.bin_stream === b));
+  if (binsHere.length && !binsHere.includes($("s-bin").value)) $("s-bin").value = binsHere[0];
+  const bin = $("s-bin").value;
   const mine = rows.filter((r) => r.site === site && r.bin_stream === bin);
   const ph = phases(mine);
   const prev = $("s-phase").value;

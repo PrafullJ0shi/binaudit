@@ -26,9 +26,10 @@ def summary_table(summaries: list[Summary]) -> str:
     lines = [head, "|---|---|---|---:|---:|---:|---:|---|"]
     for s in summaries:
         flag = " (small sample)" if s.small_sample else ""
+        ci = "needs 2+ audits" if s.audits < 2 else interval(s.ci_bootstrap) + flag
         lines.append(
             f"| {s.site} | {s.bin_stream} | {s.phase or '-'} | {s.audits} | {s.items} | {s.misplaced} | "
-            f"{pct(s.rate)} | {interval(s.ci_bootstrap)}{flag} |"
+            f"{pct(s.rate)} | {ci} |"
         )
     return "\n".join(lines)
 
