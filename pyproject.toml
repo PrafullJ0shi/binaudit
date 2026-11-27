@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "binaudit"
+version = "0.1.0"
+description = "Bin audits for hostels and wards: contamination rates with honest intervals, and before/after checks."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Prafull Joshi", email = "prafulljoshi92@gmail.com" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+binaudit = "binaudit.cli:main"
+
+[project.urls]
+Homepage = "https://prafullj0shi.github.io/binaudit/"
+Source = "https://github.com/PrafullJ0shi/binaudit"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+binaudit = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
