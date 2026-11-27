@@ -13,6 +13,12 @@
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-1B1C1E"></a>
 </p>
 
+**Demo video** (2:49): [youtu.be/Iv2SjWgkcWs](https://youtu.be/Iv2SjWgkcWs)
+
+<p align="center">
+  <a href="https://youtu.be/Iv2SjWgkcWs"><img alt="Demo video: logging an audit, results with intervals, the printed sign and the before/after check" src="https://img.youtube.com/vi/Iv2SjWgkcWs/maxresdefault.jpg" width="80%"></a>
+</p>
+
 **binaudit** is a small tool for a hostel floor, a college block or a ward that has put up
 wet, dry and hazardous bins and wants to know whether people use them correctly. You open
 a bin, note what is inside, and binaudit tells you how much of it is in the wrong bin, with
