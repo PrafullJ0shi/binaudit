@@ -46,7 +46,8 @@ code, kbd { font-family: var(--mono); font-size: var(--t14); }
 @media (max-width: 680px) { .grid, .grid.items { grid-template-columns: 1fr 1fr; } }
 label { display: flex; flex-direction: column; gap: var(--s1); font-size: var(--t14); color: var(--muted); }
 input, select, button { font: inherit; font-size: var(--t16); color: var(--ink); }
-input, select { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 2px; padding: var(--s2); min-width: 0; }
+input, select { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 2px; padding: var(--s2); min-width: 0; width: 100%; }
+input[type="file"] { width: auto; }
 input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 button { background: var(--paper); border: 1px solid var(--ink); border-radius: 2px; padding: var(--s2) var(--s4); cursor: pointer; }
 button.primary { background: var(--ink); color: var(--paper); }
