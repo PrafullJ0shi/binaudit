@@ -1,0 +1,278 @@
+{
+ "source": "Streams follow the Solid Waste Management Rules, 2016 (India): biodegradable (wet), non-biodegradable (dry) and domestic hazardous waste. Local rules differ; a site can override any item.",
+ "streams": [
+  "wet",
+  "dry",
+  "hazardous"
+ ],
+ "items": [
+  {
+   "name": "vegetable peels",
+   "stream": "wet"
+  },
+  {
+   "name": "fruit peels",
+   "stream": "wet"
+  },
+  {
+   "name": "cooked food leftovers",
+   "stream": "wet"
+  },
+  {
+   "name": "tea leaves",
+   "stream": "wet"
+  },
+  {
+   "name": "coffee grounds",
+   "stream": "wet"
+  },
+  {
+   "name": "eggshells",
+   "stream": "wet"
+  },
+  {
+   "name": "bones",
+   "stream": "wet"
+  },
+  {
+   "name": "rice and dal leftovers",
+   "stream": "wet"
+  },
+  {
+   "name": "chapati",
+   "stream": "wet"
+  },
+  {
+   "name": "flowers",
+   "stream": "wet"
+  },
+  {
+   "name": "dry leaves",
+   "stream": "wet",
+   "note": "Garden waste is biodegradable."
+  },
+  {
+   "name": "used tissue paper",
+   "stream": "wet",
+   "note": "Many cities accept soiled tissue with wet waste; check locally."
+  },
+  {
+   "name": "paper cup",
+   "stream": "dry",
+   "note": "Most paper cups have a plastic lining."
+  },
+  {
+   "name": "newspaper",
+   "stream": "dry"
+  },
+  {
+   "name": "cardboard box",
+   "stream": "dry"
+  },
+  {
+   "name": "notebook paper",
+   "stream": "dry"
+  },
+  {
+   "name": "plastic bottle",
+   "stream": "dry",
+   "note": "Empty it first."
+  },
+  {
+   "name": "chip packet",
+   "stream": "dry",
+   "note": "Multi-layer plastic."
+  },
+  {
+   "name": "biscuit wrapper",
+   "stream": "dry",
+   "note": "Multi-layer plastic."
+  },
+  {
+   "name": "milk pouch",
+   "stream": "dry",
+   "note": "Rinse before putting it in the bin."
+  },
+  {
+   "name": "plastic carry bag",
+   "stream": "dry"
+  },
+  {
+   "name": "tetra pak carton",
+   "stream": "dry",
+   "note": "Rinse and flatten."
+  },
+  {
+   "name": "aluminium can",
+   "stream": "dry"
+  },
+  {
+   "name": "glass bottle",
+   "stream": "dry",
+   "note": "Keep broken glass wrapped."
+  },
+  {
+   "name": "thermocol",
+   "stream": "dry"
+  },
+  {
+   "name": "plastic spoon",
+   "stream": "dry"
+  },
+  {
+   "name": "food container (plastic)",
+   "stream": "dry",
+   "note": "Scrape out food first; the food goes in wet."
+  },
+  {
+   "name": "straw",
+   "stream": "dry"
+  },
+  {
+   "name": "old clothes",
+   "stream": "dry"
+  },
+  {
+   "name": "rubber band",
+   "stream": "dry"
+  },
+  {
+   "name": "pen",
+   "stream": "dry"
+  },
+  {
+   "name": "toothbrush",
+   "stream": "dry"
+  },
+  {
+   "name": "sanitary pad (wrapped)",
+   "stream": "dry",
+   "note": "SWM Rules 2016: wrap securely and place with dry waste."
+  },
+  {
+   "name": "diaper (wrapped)",
+   "stream": "dry",
+   "note": "SWM Rules 2016: wrap securely and place with dry waste."
+  },
+  {
+   "name": "pizza box (clean)",
+   "stream": "dry",
+   "note": "Greasy parts go in wet; rules vary by city."
+  },
+  {
+   "name": "aluminium foil",
+   "stream": "dry",
+   "note": "Clean foil only."
+  },
+  {
+   "name": "shampoo sachet",
+   "stream": "dry",
+   "note": "Multi-layer plastic."
+  },
+  {
+   "name": "bottle cap",
+   "stream": "dry"
+  },
+  {
+   "name": "receipt (thermal paper)",
+   "stream": "dry"
+  },
+  {
+   "name": "ceramic cup (broken)",
+   "stream": "dry",
+   "note": "Wrap it before disposal."
+  },
+  {
+   "name": "battery",
+   "stream": "hazardous",
+   "note": "Hand to an e-waste or battery collection point."
+  },
+  {
+   "name": "phone charger",
+   "stream": "hazardous",
+   "note": "E-waste. Hand to an e-waste collection point."
+  },
+  {
+   "name": "earphones",
+   "stream": "hazardous",
+   "note": "E-waste. Hand to an e-waste collection point."
+  },
+  {
+   "name": "CFL bulb",
+   "stream": "hazardous",
+   "note": "Contains mercury."
+  },
+  {
+   "name": "tube light",
+   "stream": "hazardous",
+   "note": "Contains mercury."
+  },
+  {
+   "name": "expired medicine",
+   "stream": "hazardous",
+   "note": "SWM Rules 2016 list expired medicines as domestic hazardous waste."
+  },
+  {
+   "name": "used syringe",
+   "stream": "hazardous",
+   "note": "SWM Rules 2016 list used needles and syringes as domestic hazardous waste."
+  },
+  {
+   "name": "razor blade",
+   "stream": "hazardous",
+   "note": "Wrap before disposal."
+  },
+  {
+   "name": "paint can",
+   "stream": "hazardous"
+  },
+  {
+   "name": "insect spray can",
+   "stream": "hazardous",
+   "note": "Pesticide container."
+  },
+  {
+   "name": "mercury thermometer (broken)",
+   "stream": "hazardous",
+   "note": "Contains mercury."
+  },
+  {
+   "name": "nail polish remover bottle",
+   "stream": "hazardous",
+   "note": "Contains solvent."
+  },
+  {
+   "name": "printer cartridge",
+   "stream": "hazardous"
+  },
+  {
+   "name": "mosquito coil ash",
+   "stream": "wet"
+  },
+  {
+   "name": "hair",
+   "stream": "wet"
+  },
+  {
+   "name": "nail clippings",
+   "stream": "wet"
+  },
+  {
+   "name": "matchsticks (used)",
+   "stream": "wet"
+  },
+  {
+   "name": "sawdust",
+   "stream": "wet"
+  },
+  {
+   "name": "cotton (clean)",
+   "stream": "dry"
+  },
+  {
+   "name": "blister pack (empty)",
+   "stream": "dry",
+   "note": "Empty strip only; medicine goes to hazardous."
+  }
+ ]
+}
