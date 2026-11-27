@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>binaudit: bin audits for hostels and wards</title>
+<meta name="description" content="Log what is in each bin, see the contamination rate with a 95% interval, print a sign for that bin, and check whether it changed anything.">
+<link rel="preload" href="fonts/SourceSerif4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>binaudit</h1>
+      <p>Log what is in each bin. See how much of it is in the wrong bin, with a 95% interval. Print a sign for that bin, audit again, and check whether the sign changed anything.</p>
+    </div>
+    <nav aria-label="Sections">
+      <a href="#log">Log</a>
+      <a href="#results">Results</a>
+      <a href="#signs">Signs</a>
+      <a href="#data">Data</a>
+      <a href="#method">Method</a>
+    </nav>
+  </header>
+  <p class="notice" id="sample-notice" hidden>Showing the synthetic sample: generated numbers, not measurements. Clear it under Data before logging real audits.</p>
+
+  <section id="log" aria-labelledby="h-log">
+    <h2 id="h-log">Log an audit</h2>
+    <p class="muted small">Open one bin, take out each item and note it. Ten minutes per bin is enough. Every item you add is checked against the catalogue of 60 common items; change the stream if your city sorts it differently.</p>
+    <div class="grid">
+      <label>Site <input id="f-site" list="dl-sites" placeholder="Hostel A, floor 2" autocomplete="off"></label>
+      <label>Bin <select id="f-bin"><option value="wet">Wet</option><option value="dry">Dry</option><option value="hazardous">Hazardous</option></select></label>
+      <label>Date <input id="f-date" type="date"></label>
+      <label>Phase <input id="f-phase" list="dl-phases" placeholder="before sign" autocomplete="off"></label>
+    </div>
+    <h3>Items found in this bin</h3>
+    <form id="item-form" class="grid items" autocomplete="off">
+      <label>Item <input id="f-item" list="dl-items" placeholder="tea leaves" required></label>
+      <label>Belongs in <select id="f-stream"><option value="wet">Wet</option><option value="dry">Dry</option><option value="hazardous">Hazardous</option></select></label>
+      <label>Count <input id="f-count" type="number" min="1" step="1" value="1" inputmode="numeric"></label>
+      <label>Grams <input id="f-grams" type="number" min="0" step="any" placeholder="optional" inputmode="decimal"></label>
+      <button type="submit">Add</button>
+    </form>
+    <div class="hint" id="item-hint" aria-live="polite"></div>
+    <div class="scroll"><table id="draft-table" hidden>
+      <thead><tr><th>Item</th><th>Belongs in</th><th class="num">Count</th><th class="num">Grams</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <div class="tally" id="draft-tally" aria-live="polite"></div>
+    <div class="actions">
+      <button class="primary" id="save-audit" disabled>Save audit</button>
+      <span class="hint" id="save-hint"></span>
+    </div>
+  </section>
+
+  <section id="results" aria-labelledby="h-results" hidden>
+    <h2 id="h-results">Results</h2>
+    <p class="muted small">Rate is misplaced items divided by all items found in that bin. The interval resamples whole audits, so a bin checked only twice gets a wide interval.</p>
+    <div class="grid">
+      <label>Site <select id="r-site"></select></label>
+    </div>
+    <div class="scroll"><table id="summary-table">
+      <thead><tr><th>Bin</th><th>Phase</th><th class="num">Audits</th><th class="num">Items</th><th class="num">Misplaced</th><th class="num">Rate</th><th class="num">95% interval</th><th>0 to 100%</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <div id="summary-empty" class="empty" hidden>No audits yet. Log one, or load the synthetic sample under Data.</div>
+
+    <h3>Did it change?</h3>
+    <div class="grid">
+      <label>Before <select id="c-before"></select></label>
+      <label>After <select id="c-after"></select></label>
+    </div>
+    <div class="scroll"><table id="compare-table">
+      <thead><tr><th>Bin</th><th class="num">Before</th><th class="num">After</th><th class="num">Difference</th><th class="num">95% interval</th><th>-50 to +50 pp</th><th>Reading</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <div id="compare-empty" class="empty" hidden>Needs audits of the same bin in two phases, for example "before sign" and "after sign".</div>
+
+    <h3>Most often in the wrong bin</h3>
+    <div class="scroll"><table id="top-table">
+      <thead><tr><th>Found in</th><th>Item</th><th>Belongs in</th><th class="num">Count</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  <section id="signs" aria-labelledby="h-signs" hidden>
+    <h2 id="h-signs">Sign for a bin</h2>
+    <p class="muted small">The sign names the items people actually put in this bin by mistake, taken from your audits. It prints on A5 in black and white.</p>
+    <div class="grid">
+      <label>Site <select id="s-site"></select></label>
+      <label>Bin <select id="s-bin"><option value="wet">Wet</option><option value="dry">Dry</option><option value="hazardous">Hazardous</option></select></label>
+      <label>From phase <select id="s-phase"></select></label>
+    </div>
+    <div class="actions"><button class="primary" id="print-sign">Print sign</button></div>
+    <div id="sign"></div>
+  </section>
+
+  <section id="data" aria-labelledby="h-data" hidden>
+    <h2 id="h-data">Data</h2>
+    <p class="muted small">Everything is stored in this browser only. Export a CSV to keep it, share it, or analyse it with the <code>binaudit</code> command line tool.</p>
+    <p class="tally" id="data-count"></p>
+    <div class="actions">
+      <button id="export-csv">Export CSV</button>
+      <label class="small" style="flex-direction:row;align-items:center;gap:8px"><input type="file" id="import-csv" accept=".csv,text/csv"> Import CSV (adds to current data)</label>
+    </div>
+    <div class="actions">
+      <button id="load-sample">Load synthetic sample</button>
+      <button id="clear-data">Delete all data in this browser</button>
+    </div>
+    <div class="hint" id="data-hint" aria-live="polite"></div>
+    <h3>Audits</h3>
+    <div class="scroll"><table id="audit-table">
+      <thead><tr><th>Audit</th><th>Date</th><th>Site</th><th>Bin</th><th>Phase</th><th class="num">Items</th><th class="num">Misplaced</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  <section id="method" aria-labelledby="h-method" hidden>
+    <h2 id="h-method">Method</h2>
+    <dl class="method">
+      <dt>Streams</dt><dd>Wet (biodegradable), dry (non-biodegradable) and domestic hazardous, as in India's Solid Waste Management Rules, 2016. Sanitary waste is wrapped and goes with dry waste under those rules. The catalogue is a starting point; cities differ.</dd>
+      <dt>Rate</dt><dd>Misplaced items / all items found in a bin, pooled over the audits in a phase. If every item in a group has a weight, the mass rate is computed the same way in grams and shown in the CSV export from the command line tool.</dd>
+      <dt>Interval</dt><dd>95% percentile interval from 2,000 bootstrap draws that resample whole audits (a cluster bootstrap). Items from one bin on one day are not independent, so resampling items would give intervals that are too narrow. The seed is fixed, so the same data always gives the same interval.</dd>
+      <dt>Small sample</dt><dd>Flagged when a group has fewer than 5 audits or fewer than 30 items.</dd>
+      <dt>Did it change?</dt><dd>After rate minus before rate, with a bootstrap interval that resamples audits within each phase. If the interval is entirely below zero the reading is "fewer misplaced items after"; entirely above zero, "more"; otherwise "no clear change". A bin with no sign, audited over the same weeks, is the best check that the change came from the sign.</dd>
+      <dt>Same numbers</dt><dd>The command line tool computes the same numbers from an exported CSV. A test runs both on the sample and requires them to match to 1e-12.</dd>
+    </dl>
+  </section>
+
+  <footer>
+    binaudit 0.1.0. MIT licence. No account, no tracking, no network calls after the page loads.
+    <a href="https://github.com/PrafullJ0shi/binaudit">Source and command line tool</a>.
+  </footer>
+</div>
+<datalist id="dl-items"></datalist>
+<datalist id="dl-sites"></datalist>
+<datalist id="dl-phases"></datalist>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
