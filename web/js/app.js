@@ -28,9 +28,23 @@ const SECTIONS = ["log", "results", "signs", "data", "method"];
 function route() {
   const id = SECTIONS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "log";
   for (const s of SECTIONS) $(s).hidden = s !== id;
+  if (id === "method") loadVideo();
   document.querySelectorAll("nav a").forEach((a) => a.setAttribute("aria-current", a.getAttribute("href") === "#" + id ? "page" : "false"));
 }
 window.addEventListener("hashchange", route);
+
+// The demo video is only requested when the Method page is opened. No autoplay.
+function loadVideo() {
+  const slot = $("video-slot");
+  if (!slot || slot.firstChild) return;
+  const f = document.createElement("iframe");
+  f.src = `https://www.youtube-nocookie.com/embed/${slot.dataset.video}?rel=0`;
+  f.title = "binaudit demo video";
+  f.loading = "lazy";
+  f.allow = "encrypted-media; picture-in-picture; fullscreen";
+  f.referrerPolicy = "strict-origin-when-cross-origin";
+  slot.appendChild(f);
+}
 
 // ---------- helpers ----------
 function fillSelect(sel, values, labels = values, keep = true) {
