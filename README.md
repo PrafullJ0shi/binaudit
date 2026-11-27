@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="https://prafullj0shi.github.io/binaudit/"><img alt="Live app" src="https://img.shields.io/badge/live%20app-GitHub%20Pages-B3401E"></a>
-  <a href="https://github.com/PrafullJ0shi/binaudit/actions/workflows/tests.yml"><img alt="Tests" src="https://github.com/PrafullJ0shi/binaudit/actions/workflows/tests.yml/badge.svg"></a>
+  <a href="tests"><img alt="Tests: 27 (pytest)" src="https://img.shields.io/badge/tests-27%20(pytest)-1B1C1E"></a>
   <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-1B1C1E">
   <img alt="Runtime dependencies: 0" src="https://img.shields.io/badge/runtime%20dependencies-0-1B1C1E">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-1B1C1E"></a>
@@ -56,9 +56,9 @@ usually noise. binaudit does the arithmetic properly and says so in plain words.
 ## Facts about this version
 
 - 60 items in the catalogue, each mapped to wet, dry or hazardous as in the SWM Rules, 2016.
-- 27 tests, run on Linux and Windows with Python 3.10 and 3.13.
+- 27 tests (pytest), including parity between the browser and Python code.
 - The browser and the Python tool give the same rates, intervals and comparisons on the
-  sample, to within 1e-12; a test checks this on every push.
+  sample, to within 1e-12; `tests/test_parity.py` checks this.
 - The web app is plain HTML, CSS and JavaScript: about 40 KB of code plus 150 KB of
   self-hosted fonts, no build step, no third-party requests.
 - The Python package has no runtime dependencies.
@@ -112,6 +112,12 @@ because browsers block module scripts on `file://` pages.
 ```bash
 python -m pytest -q
 ```
+
+## Publishing the app
+
+GitHub Pages serves the `gh-pages` branch, which holds only the contents of `web/`.
+After changing anything in `web/`, run `sh scripts/publish-pages.sh` (Git Bash on
+Windows).
 
 ## How it works
 

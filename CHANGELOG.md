@@ -18,4 +18,4 @@ All notable changes to this project are listed here. The format follows
 - Python package and `binaudit` command: `summary`, `compare`, `report`, `lookup`, `sample`.
 - Labelled synthetic sample data set and a generator for it.
 - 27 tests, including a parity test between the JavaScript and Python implementations.
-- GitHub Actions: tests on Linux and Windows; deployment of `web/` to GitHub Pages.
+- `scripts/publish-pages.sh` to publish `web/` to the `gh-pages` branch for GitHub Pages.
