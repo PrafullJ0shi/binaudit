@@ -1,0 +1,6 @@
+Source Serif 4: Copyright 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
+JetBrains Mono: Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono).
+
+Both fonts are licensed under the SIL Open Font License, Version 1.1.
+The full licence text is at https://openfontlicense.org/open-font-license-official-text/
+These files are the Latin subsets served by Google Fonts, unmodified.
