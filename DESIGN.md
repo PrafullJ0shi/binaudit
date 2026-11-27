@@ -26,8 +26,9 @@ answer that question:
    axes, rules and text are graphite.
 4. Same arithmetic everywhere. The browser and the Python CLI compute identical numbers
    from the same CSV, and a test checks it.
-5. Local first. No account, no server, no network call after the page loads. Data stays
-   in the browser until the user exports it.
+5. Local first. No account, no server. The only outside request is the demo video, and
+   only when the Method page is opened; it never autoplays. Data stays in the browser
+   until the user exports it.
 
 ## Tokens
 
