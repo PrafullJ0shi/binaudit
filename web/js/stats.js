@@ -189,8 +189,10 @@ export function summarise(rows, opts = {}) {
       small_sample: audits.length < SMALL_AUDITS || total < SMALL_ITEMS,
     });
   }
+  const order = phases(rows);
+  const cmp = (x, y) => (x < y ? -1 : x > y ? 1 : 0);
   out.sort((a, b) =>
-    a.site.localeCompare(b.site) || STREAMS.indexOf(a.bin_stream) - STREAMS.indexOf(b.bin_stream) || a.phase.localeCompare(b.phase));
+    cmp(a.site, b.site) || STREAMS.indexOf(a.bin_stream) - STREAMS.indexOf(b.bin_stream) || order.indexOf(a.phase) - order.indexOf(b.phase));
   return out;
 }
 
@@ -206,7 +208,7 @@ export function topMisplaced(rows, { site, bin_stream, phase = null, k = 3 } = {
     e.count += r.count;
     tally.set(key, e);
   }
-  return [...tally.values()].sort((a, b) => b.count - a.count || a.item.localeCompare(b.item)).slice(0, k);
+  return [...tally.values()].sort((a, b) => b.count - a.count || (a.item < b.item ? -1 : a.item > b.item ? 1 : 0)).slice(0, k);
 }
 
 // Before/after comparison of one bin. Difference = after - before, so a negative
@@ -234,6 +236,13 @@ export function compare(rows, { site, bin_stream, before, after, B = 2000, seed 
     audits_before: a.length, audits_after: b.length,
     rate_before: ra, rate_after: rb, difference: rb - ra, ci, verdict,
   };
+}
+
+export function bins(rows) {
+  const seen = new Map();
+  for (const r of rows) seen.set(r.site + "\u001f" + r.bin_stream, [r.site, r.bin_stream]);
+  const cmp = (x, y) => (x < y ? -1 : x > y ? 1 : 0);
+  return [...seen.values()].sort((a, b) => cmp(a[0], b[0]) || STREAMS.indexOf(a[1]) - STREAMS.indexOf(b[1]));
 }
 
 export function phases(rows) {

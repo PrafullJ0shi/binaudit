@@ -174,7 +174,8 @@ def summarise(rows: list[Row], B: int = 2000, seed: int = 7) -> list[Summary]:
                 small_sample=len(audits) < SMALL_AUDITS or total < SMALL_ITEMS,
             )
         )
-    out.sort(key=lambda s: (s.site, STREAMS.index(s.bin_stream), s.phase))
+    order = phases(rows)
+    out.sort(key=lambda s: (s.site, STREAMS.index(s.bin_stream), order.index(s.phase)))
     return out
 
 
@@ -239,6 +240,11 @@ def compare(rows: list[Row], site: str, bin_stream: str, before: str, after: str
     elif ci[0] > 0:
         verdict = "more misplaced items after"
     return Comparison(site, bin_stream, before, after, len(a), len(b), ra, rb, rb - ra, ci, verdict)
+
+
+def bins(rows: list[Row]) -> list[tuple[str, str]]:
+    """(site, bin_stream) pairs, sorted by site then stream order."""
+    return sorted({(r.site, r.bin_stream) for r in rows}, key=lambda p: (p[0], STREAMS.index(p[1])))
 
 
 def phases(rows: list[Row]) -> list[str]:
